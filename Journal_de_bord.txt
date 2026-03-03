@@ -1,4 +1,4 @@
 - Taches :
 V1 : Trouver l'existence d'une solution   -> OK
-V2 : Afficher la solution si elle existence
+V2 : Afficher la solution si elle existence    -> OK, il reste à améliorer l'affichage
 V3 : Afficher toutes les solutions possibles
