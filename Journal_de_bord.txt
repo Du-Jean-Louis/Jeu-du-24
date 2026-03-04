@@ -4,4 +4,6 @@ V2 : Afficher la solution si elle existence    -> OK, il reste à améliorer l'a
 
 Faire un système de couleurs ? Pour bien comprendre à quoi correspond chaque valeur  -> OK
 
-V3 : Afficher toutes les solutions possibles
+V3 : Afficher toutes les solutions possibles  -> OK
+
+V4 : Généraliser pour un autre nombre que 24 et trouver quelle autre configuration serait intéressante
