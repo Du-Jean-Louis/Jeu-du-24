@@ -7,3 +7,7 @@ Faire un système de couleurs ? Pour bien comprendre à quoi correspond chaque v
 V3 : Afficher toutes les solutions possibles  -> OK
 
 V4 : Généraliser pour un autre nombre que 24 et trouver quelle autre configuration serait intéressante
+-> Généralisation  OK
+-> Recherche d'une configuration optimale pour 4 cartes -> goal = 10 donne 90% de configurations solvables contre 79% pour goal = 24
+
+-> Pour 5 cartes le nombre de configuration explose et le temps de calcul est extrêmement long
