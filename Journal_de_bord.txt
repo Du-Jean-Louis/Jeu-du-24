@@ -11,5 +11,7 @@ V4 : Généraliser pour un autre nombre que 24 et trouver quelle autre configura
 -> Recherche d'une configuration optimale pour 4 cartes -> goal = 10 donne 90% de configurations solvables contre 79% pour goal = 24
 
 -> Pour 5 cartes le nombre de configuration explose et le temps de calcul est extrêmement long
-Peut-être faire un tirage aléatoire au lieu de tester toutes configurations
-Et utiliser l'algo de V2, il nous suffit de savoir qu'une seule solution existe
+Peut-être faire un tirage aléatoire au lieu de tester toutes configurations   -> OK
+Et utiliser l'algo de V2, il nous suffit de savoir qu'une seule solution existe     -> OK
+
+On trouve que 36 et 40 sont de bons candidats pour 5 cartes

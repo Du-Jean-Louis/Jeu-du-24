@@ -89,8 +89,8 @@ def f4(values, goal=24, all_solutions=True, start=True, affichage=True ,colors=[
                 if f4(new_values, goal, all_solutions, False, False, new_colors, new_comm):
                     solutions.append(new_comm)
                     # Si on veut seulement une solution
-                    if not all_solutions:
-                        break
+                if not all_solutions and len(solutions)==1:
+                    break
             if not all_solutions and len(solutions)==1:
                 break
         if not all_solutions and len(solutions)==1:
