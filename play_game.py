@@ -25,13 +25,15 @@ def operation_elementaire(a, b, color_a, color_b):
 
     return res
 
-def f4(values,goal=24,start=True, affichage=True ,colors=[],commentaires=""):
+def f4(values, goal=24, all_solutions=True, start=True, affichage=True ,colors=[],commentaires=""):
     """ Etant donné une liste de nombres, renvoie s'il est possible d'obtenir 24 en utilisant chaque nombre une unique fois. 
     Lorsque cela est possible, il print une façon de le calculer. Cette fonction fonctionne par récursion.
 
     Entrées :
     - list : liste de nombres
     - goal : nombre que l'on souhaite atteindre, pas forcément 24
+    - all_solutions : pour décider de chercher ou non toutes les solutions
+    - affichage : pour réaliser l'affichage
     - start : pour réaliser l'affichage que dans le premier lancement de la fonction
     - color : pour l'affichage en couleur du calcul, pour savoir d'où provient chaque valeur (pas à renseigner, intervient seulement dans la récursion)
     - commentaire : pour garder le détail des calculs (pas à renseigner, intervient seulement dans la récursion)
@@ -73,12 +75,8 @@ def f4(values,goal=24,start=True, affichage=True ,colors=[],commentaires=""):
             l = operation_elementaire(values[i],values[j],colors[i],colors[j])
             
             # On garde les valeurs qui n'ont pas été combinés par opérations élémentaires
-            values_k = []
-            colors_k = []
-            for k in range(n):
-                if k!=i and k!=j:
-                    values_k.append(values[k])
-                    colors_k.append(colors[k])
+            values_k = [values[k] for k in range(n) if k not in (i, j)]
+            colors_k = [colors[k] for k in range(n) if k not in (i, j)]
 
             # On rappelle la fonction sur les valeurs non utilisé + un des résultats obtenues par calcul élémentaire 
             for comm, r in l.items():
@@ -88,11 +86,18 @@ def f4(values,goal=24,start=True, affichage=True ,colors=[],commentaires=""):
                 new_colors.append(max(colors)+1)
                 # On garde en mémoire le calcul réalisé pour en arriver ici
                 new_comm = commentaires + "\n" + comm + f"{attr('reset')}=" + f"{fg(new_colors[-1])}{r}" + f"{attr('reset')}"
-                if f4(new_values, goal, False, False, new_colors, new_comm):
+                if f4(new_values, goal, all_solutions, False, False, new_colors, new_comm):
                     solutions.append(new_comm)
+                    # Si on veut seulement une solution
+                    if not all_solutions:
+                        break
+            if not all_solutions and len(solutions)==1:
+                break
+        if not all_solutions and len(solutions)==1:
+            break
 
     if start:
-        if affichage : print(f"Il y a {len(solutions)} solutions possibles")
+        if affichage and all_solutions: print(f"Il y a {len(solutions)} solutions possibles")
         for num,solution in enumerate(solutions):
             if affichage : print(f"Solution numéro {num+1} :\n{solution}\n_________\n")
         return len(solutions)
@@ -117,6 +122,21 @@ def demande_entier(entree, strictement_positif=False):
 
 goal = demande_entier("Quel est le goal ? ")
 
+while True:
+    try:
+        all_solutions = input("Afficher toutes les solutions ? Oui ou Non ")
+        if all_solutions == "Oui":
+            all_solutions = True
+            break
+        elif all_solutions == "Non":
+            all_solutions = False
+            break
+        else :
+            raise ValueError
+        
+    except ValueError:
+        print("Il faut entrer Oui ou Non.")
+
 nombre_cartes = demande_entier(
     "Combien de cartes faut-il piocher ? ",
     strictement_positif=True
@@ -127,5 +147,5 @@ valeurs = [
     for i in range(nombre_cartes)
 ]
 
-f4_goal = partial(f4, goal=goal)
+f4_goal = partial(f4, goal=goal, all_solutions=all_solutions)
 f4_goal(valeurs)
